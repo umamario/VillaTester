@@ -28,11 +28,11 @@ def lambda_handler(event, context):
     process.start()
 
     stats = crawler.stats.get_stats()
-    total_time = (stats['finish_time'] - stats['start_time']).total_seconds() / 60
+
     mean_response_time = statistics.mean(crawler.spider.response_times)
 
-    result = f"{stats['downloader/request_count']} requests in  {round(total_time, 2)} minutes" \
-             f" with average response time of {round(mean_response_time, 2)} seconds"
+    result = f"{stats['downloader/request_count']} requests " \
+             f"with an average response time of {round(mean_response_time, 2)} seconds"
 
     return {
         "statusCode": 200,

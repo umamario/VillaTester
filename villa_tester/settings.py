@@ -1,7 +1,7 @@
 import os
 
 TIMEZONE = 'Asia/Bangkok'
-
+DOMAIN_TO_TEST = os.environ['DOMAIN']
 SCRAPY_SETTINGS = {
     "HTTPERROR_ALLOWED_CODES": [200, 301, 302, 400, 401, 403, 404, 500, 502, 503, 504],
     "FEED_FORMAT": 'csv',

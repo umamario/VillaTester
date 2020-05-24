@@ -1,21 +1,18 @@
-from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from settings import ERROR_MESSAGES
+from scrapy.spiders import CrawlSpider, Rule
+
 from items import VillaScraperItem
+from settings import ERROR_MESSAGES, DOMAIN_TO_TEST
 
 link_traceback = {}
 
 
 class VillaSpider(CrawlSpider):
     name = 'VillaSpider'
-    allowed_domains = ['blog.pazmi.no']
     link_extractor = LinkExtractor(deny=(r".+\?p=[0-9]+.*", r".+\/[0-9]{3,10}(\-[a-zA-Z0-9])+.*"))
-    # allowed_domains = ['shoponline.villamarket.com']
+    allowed_domains = [DOMAIN_TO_TEST]
+    start_urls = allowed_domains
     response_times = []
-    start_urls = [
-        # 'https://shoponline.villamarket.com'
-        "https://blog.pazmi.no/"
-    ]
 
     rules = (
         Rule(link_extractor, callback='parse_item', follow=True),
